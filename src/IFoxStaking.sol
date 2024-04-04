@@ -13,16 +13,26 @@ interface IFOXStaking {
     /// @param amount The amount of FOX tokens to be unstaked.
     function unstake(uint256 amount) external;
 
-    /// @notice Returns the amount of FOX tokens staked by an address.
-    /// @param address The address we're querying the balance for
-    /// @return The amount of FOX tokens staked by the address.
-    function balanceOf(address address) external view returns (uint256);
-
     /// @notice Allows a user to claim their accumulated rewards.
     function claimRewards() external;
 
     /// @notice Allows a user to initially set (or update) their THORChain (RUNE) address for receiving staking rewards.
     /// @param runeAddress The new RUNE address to be associated with the user's staked FOX position.
     function setRuneAddress(address runeAddress) external;
+
+    /// @notice Update the ThorChain (RUNE) address for a user's staking rewards to a new address.
+    /// @param newRuneAddress The new ThorChain (RUNE) address.
+    function updateRuneAddress(address newRuneAddress) external;
+
+    /// @notice View the staked balance of FOX tokens for a given address.
+    /// @param user The address we're getting the staked FOX balance for.
+    /// @return The amount of staked FOX tokens.
+    function balanceOf(address address) external view returns (uint256);
+
+    /// @notice Retrieve cooldown information for a given address.
+    /// @param user The address to query cooldown info for.
+    /// @return amount The amount of FOX tokens currently cooling down.
+    /// @return expiry The timestamp when the cooldown period ends and tokens can be withdrawn.
+    function coolDownInfo(address user) external view returns (uint256 amount, uint256 expiry);
 }
 
